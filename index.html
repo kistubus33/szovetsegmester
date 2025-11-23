@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SzövetségMester</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0d1117;
+      --panel:#161b22;
+      --muted:#8b99a4;
+      --accent:#3b82f6;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui;
+      background:var(--bg);
+      color:#e6edf3;
+      padding:40px 20px;
+      display:flex;
+      justify-content:center;
+    }
+    .container{
+      width:100%;
+      max-width:900px;
+      background:var(--panel);
+      border-radius:var(--radius);
+      padding:32px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    header{
+      text-align:center;
+      margin-bottom:28px;
+    }
+    .logo{
+      font-size:28px;
+      font-weight:700;
+      letter-spacing:1px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      user-select:none;
+    }
+    .logo-icon{
+      width:32px;
+      height:32px;
+      border:2px solid var(--accent);
+      border-radius:6px;
+      position:relative;
+    }
+    .logo-icon::after{
+      content:"";
+      position:absolute;
+      inset:6px;
+      border-radius:4px;
+      background:var(--accent);
+      opacity:0.8;
+    }
+    .logo-text {
+        font-family: 'Cinzel', serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      margin-top:18px;
+    }
+    .tab{
+      background:none;
+      border:none;
+      padding:10px 20px;
+      font-size:16px;
+      cursor:pointer;
+      border-radius:8px;
+      font-weight:600;
+      color:var(--muted);
+      transition:background 0.25s, color 0.25s;
+    }
+    .tab:hover{
+      background:rgba(255,255,255,0.05);
+      color:white;
+    }
+    .tab.active{
+      background:var(--accent);
+      color:white;
+    }
+    .panel{
+      margin-top:20px;
+      min-height:260px;
+      position:relative;
+    }
+    .content{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transform:translateY(8px);
+      transition:opacity 0.3s, transform 0.3s;
+      pointer-events:none;
+    }
+    .content.active{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+    h1{margin:0 0 12px 0;font-size:22px}
+    p{margin:0 0 12px 0;color:var(--muted);line-height:1.6}
+      .logo-img{
+      height:48px;
+      width:auto;
+      object-fit:contain;
+      display:block;
+    }
+    /* Galéria */
+.gallery {
+  margin-top: 60px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Alap képek és flip kártya képei */
+.gallery-img, .flip-front img, .flip-back img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Hover effekt általános képeknél */
+.gallery-img:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Flip card */
+.flip-card {
+  width: 100%;
+  height: 200px;
+  perspective: 1000px;
+  transition: transform 0.25s;
+}
+
+/* Hover hatás a flip-kártyára */
+.flip-card:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
+
+/* Belső flip mechanika */
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Kattintásra fordul meg */
+.flip-card.active .flip-inner {
+  transform: rotateY(180deg);
+}
+.gallery {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Első sor: flip + termék 3 */
+.top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Második sor: termék 4–5 egymás mellett */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Képek */
+.gallery-img, .flip-front img, .flip-back img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* Hover */
+.gallery-img:hover {
+  transform: scale(1.05);
+  opacity: .9;
+}
+
+/* Flipcard fix magasság */
+.flip-card {
+  height: 300px;
+  perspective: 1000px;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="https://i.imgur.com/71dvJSP.jpeg" alt="SzövetségMester logó" class="logo-img">
+        <span class="logo-text">SzövetségMester</span>
+      </div>
+      <nav>
+        <button class="tab active" data-tab="home">Kezdőlap</button>
+        <button class="tab" data-tab="game">Játékmenet</button>
+        <button class="tab" data-tab="rules">Szabályok</button>
+      </nav>
+    </header>
+
+    <div class="panel">
+      <section id="home" class="content active">
+        <h1>Kezdőlap</h1>
+        <p>Üdvözlünk a SzövetségMester oldalán! Itt megismerheted a játékunkat, elérheted online a szabályzatot és a játék menetet! Jó szórakozást kíván a játékhoz a SzövetségMester csapata!🎊<br><br>A csomag tartalma:<br>  - xy Kérdés-Válasz kártya🧐<br>   - xy Titkos Kártya❓<br>  - xy Arany Krajcár(Token)💰<br>   - 1db Pont követő füzet📝<br></p>
+        <div class="gallery">
+            <div class="top-row">
+                <div class="flip-card">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                    <img src="https://i.imgur.com/0rZOW1V.jpeg" alt="Termék kép 1">
+                    </div>
+                    <div class="flip-back">
+                    <img src="https://i.imgur.com/nwRGC9R.jpeg" alt="Termék kép 2">
+                    </div>
+                </div>
+                </div>
+
+                <img class="gallery-img" src="https://i.imgur.com/yY8M60Z.jpeg" alt="Termék kép 3">
+            </div>
+            <div class="bottom-row">
+                <img class="gallery-img" src="https://i.imgur.com/9TCx6wz.jpeg" alt="Termék kép 4">
+                <img class="gallery-img" src="https://i.imgur.com/fiI1vKP.jpeg" alt="Termék kép 5">
+            </div>
+        </div>
+
+
+
+      </section>
+
+      <section id="game" class="content">
+        <h1>Játékmenet</h1>
+        <p>A játék óramutató járásával megegyező irányban halad. A kezdő játékos felhúz egy kérdés kártyát a pakliból. A következő játékos kiválaszt egy kérdést a három közül (növekvő sorrendben vannak a kérdések nehézsége). A húzó felolvassa a kérdést, amire a soros játékos meg próbál válaszolni. Amennyiben a játékos helyesen válaszol, a kérdés nehézségének függvényében kap 1, 2 vagy 4 pontot. Amennyiben helytelen a válsz a játék folytatódik. Ha valamelyik játékos elér 8 pontot, vehet egy tokent. 2 token után meg egy hátráltató, vagy segítő kártyát, amit a játék során bármikor felhasználhat, egyszer. A játéknak akkor van vége, ha valamelyik játékos elér 250 pontot.</p>
+      </section>
+
+      <section id="rules" class="content">
+        <h1>Szabályok</h1>
+        <p>A szabálykönyv kivonata: pontozás, akciók, engedélyek és tiltások egy helyen, egyszerűen.</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const tabs=document.querySelectorAll('.tab');
+    const contents=document.querySelectorAll('.content');
+
+    tabs.forEach(t=>{
+      t.addEventListener('click',()=>{
+        tabs.forEach(x=>x.classList.remove('active'));
+        t.classList.add('active');
+        contents.forEach(c=>c.classList.remove('active'));
+        document.getElementById(t.dataset.tab).classList.add('active');
+      });
+    });
+    const flipCard = document.querySelector('.flip-card');
+
+    flipCard.addEventListener('click', () => {
+    flipCard.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
